@@ -14,18 +14,4 @@ class Hello extends Component {
   }
 }
 
-
-// alt way with method
-// const Hello = (props) =>{
-//   return(
-//     <div className="f1 tc ">
-//     <h1>Hello</h1>
-
-//     <p> {props.welcome} </p>
-
-
-//    </div>
-//   );
-// }
-
 export default Hello;
