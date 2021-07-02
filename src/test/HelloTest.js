@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+// we us className= here instead of class because this javascript
+
+
 
 class Hello extends Component {
   render() {
