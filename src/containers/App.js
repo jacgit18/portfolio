@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import CardList from "./Components/CardList";
+import CardList from "../Components/CardList";
 // import { robots } from "./Components/robots"; // must destructure since not exporting default 
-import SearchBox from "./Components/SearchBox";
-import './App.css';
-import Scroll from "./Components/Scroll";
+import SearchBox from "../Components/SearchBox";
+import '../style/App.css';
+import Scroll from "../Components/Scroll";
+import ErrorBoundary from "../Components/ErrorBoundary";
 
 
 // state -> props a state is a object that can change and affect the app use class when dealing with state
@@ -39,12 +40,13 @@ class App extends Component {
   }
 // we render multiple times if we update state
   render() {
-    const filteredRobots = this.state.robots.filter( (robot) => {
-        return robot.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
+    const { robots, searchfield } = this.state;
+    const filteredRobots = robots.filter( (robot) => {
+        return robot.name.toLowerCase().includes(searchfield.toLowerCase())
     })
     // console.log("render")
     // if robots app state array is empty load or return other components of render 
-    if(this.state.robots.length === 0) {
+    if(!robots.length) {
         return <h1> Loading</h1>
     } else{
 
@@ -53,11 +55,25 @@ class App extends Component {
         <h1 className="f1">RoboFriends</h1>
         <SearchBox searchChange = {this.onSearchChange} />
         <Scroll>
+        <ErrorBoundary>
         <CardList robots={filteredRobots} />
+        </ErrorBoundary>
         </Scroll>
       </div>
     );
     }
+
+    // ternary versiom
+  //   return !robots.length ? <h1> Loading</h1> :
+  // (
+  //   <div className="tc ">
+  //     <h1 className="f1">RoboFriends</h1>
+  //     <SearchBox searchChange = {this.onSearchChange} />
+  //     <Scroll>
+  //     <CardList robots={filteredRobots} />
+  //     </Scroll>
+  //   </div>
+  // );
   }
 }
 

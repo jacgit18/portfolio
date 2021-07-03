@@ -3,7 +3,7 @@
         font-family: 'UltraViolent BB Italic';
         font-style: normal;
         font-weight: normal;
-        src: local('UltraViolent BB Italic'), url('./font/ultraviolentbb_ital.woff') format('woff');
+        src: local('UltraViolent BB Italic'), url('../font/ultraviolentbb_ital.woff') format('woff');
         }
 
         h1{
