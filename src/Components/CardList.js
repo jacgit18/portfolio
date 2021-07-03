@@ -1,6 +1,8 @@
 import React from "react";
 import Card from "./Card";
 
+// pure functions and props are just inputs that dont get modified
+
 const CardList = ({ robots }) => {
   return (
     <div>
