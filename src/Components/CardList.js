@@ -4,7 +4,7 @@ import Card from "./Card";
 // pure functions and props are just inputs that dont get modified
 
 const CardList = ({ robots }) => {
-  // good for production
+  // good for production`
   // if(true){
   //   throw new Error("Nooo")
   // }
