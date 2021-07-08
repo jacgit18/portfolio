@@ -1,13 +1,17 @@
-
-    @font-face {
-        font-family: 'UltraViolent BB Italic';
-        font-style: normal;
-        font-weight: normal;
-        src: local('UltraViolent BB Italic'), url('../font/ultraviolentbb_ital.woff') format('woff');
-        }
-
-        h1{
-            font-family: UltraViolent BB Italic;
-            font-weight: 200 ;
-            color: #0ccac4;
-        }
+.App {
+    text-align: center;
+  }
+  
+  .center {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .particles {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+  }
