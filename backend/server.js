@@ -1,17 +1,19 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
 // app.use(bodyParser.json());
+app.use(cors());
 
 const dataBase = {
   user: [
     {
       id: "123",
-      name: "John",
-      email: "john@example.com",
+      name: "Joshua",
+      email: "joshuacarpentier21@gmail.com",
       password: "cook",
       entries: 0,
       joined: new Date(),
@@ -41,9 +43,9 @@ app.get("/", (req, res) => {
 });
 
 app.post("/signin", (req, res) => {
-    bcrypt.compare("cook", '$2a$10$TmnSKQGgEfZvNariYdDv5.QjcJSdqmh2LppbnPIJ23IpQIiuBHh5y', function(err, res) {
-console.log("first guess", res);  
-  });
+//     bcrypt.compare("cook", '$2a$10$TmnSKQGgEfZvNariYdDv5.QjcJSdqmh2LppbnPIJ23IpQIiuBHh5y', function(err, res) {
+// console.log("first guess", res);  
+  // });
     // bcrypt.compare("not_bacon", hash, function(err, res) {
     //     // res === false
     // });
