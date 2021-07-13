@@ -11,10 +11,7 @@ import ImageLinkForm from "../Components/ImageLinkForm/ImageLinkForm";
 import FaceRecognition from "../Components/FaceRecognition/FaceRecognition";
 import Rank from "../Components/Rank/Rank";
 import Banner from "../Components/Banner";
-// import Body from "../Components/Body";
 import Footer from "../Components/Footer";
-// import Scroll from "../Components/Scroll";
-// import ErrorBoundary from "../Components/ErrorBoundary";
 import '../style/App.css';
 
 
@@ -146,13 +143,6 @@ onRouteChange = (route) => {
           params={particlesOptions}
         /> */}
         <Banner />
-
-      
-
-        
-        {/* <Scroll> */}
-        {/* <ErrorBoundary>
-        </ErrorBoundary> */}
 
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
         { route === 'home'
