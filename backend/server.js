@@ -54,7 +54,8 @@ app.post("/signin", (req, res) => {
     req.body.email === dataBase.user[0].email &&
     req.body.password === dataBase.user[0].password
   ) {
-    res.json("success we did it");
+    res.json(dataBase.users[0]);
+
   } else {
     res.status(400).json("error we tried");
   }
@@ -62,16 +63,15 @@ app.post("/signin", (req, res) => {
 
 app.post("/register", (req, res) => {
   const { email, name, password } = req.body;
-  bcrypt.genSalt(10, function(err, salt) {
-    bcrypt.hash(password, salt, function(err, hash) {
-        console.log(hash);
-    });
-});
+//   bcrypt.genSalt(10, function(err, salt) {
+//     bcrypt.hash(password, salt, function(err, hash) {
+//         console.log(hash);
+//     });
+// });
   dataBase.user.push({
     id: "125",
     name: name,
     email: email,
-    password: password,
     entries: 0,
     joined: new Date(),
   });
