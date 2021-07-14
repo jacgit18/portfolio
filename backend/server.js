@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
 
+
 const app = express();
 app.use(express.json());
 // app.use(bodyParser.json());
