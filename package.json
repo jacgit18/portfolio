@@ -4,7 +4,11 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+    "start": "nodemon backend/server.js",
+    "dev": "nodemon -r dotenv/config api/app.js",
+    "docker_dev": "nodemon --legacy-watch ./api/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd client && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -24,5 +28,10 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.6.5",
     "sqlite3": "^5.0.2"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "frontend/"
+    ]
   }
 }
