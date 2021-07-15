@@ -4,8 +4,14 @@ const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const knex = require('knex');
 
+const register = require('./controller/register');
+const signin = require('./controller/signin');
+const profile = require('./controller/profile');
+const image = require('./controller/image');
+
+
 const db = knex({
-  client: 'pgsql',
+  client: 'pg',
   connection: process.env.POSTGRES_URI 
 
   // connection: {
@@ -62,139 +68,104 @@ const dataBase = {
  *
  */
 
-app.get("/", (req, res) => {
-  res.send(dataBase.user);
-});
+app.get("/", (req, res) => {res.send(dataBase.user);});
 
-app.post("/signin", (req, res) => {
-//     bcrypt.compare("cook", '$2a$10$TmnSKQGgEfZvNariYdDv5.QjcJSdqmh2LppbnPIJ23IpQIiuBHh5y', function(err, res) {
-// console.log("first guess", res);  
-  // });
-    // bcrypt.compare("not_bacon", hash, function(err, res) {
-    //     // res === false
-    // });
-    
-  // if (
-  //   req.body.email === dataBase.user[0].email &&
-  //   req.body.password === dataBase.user[0].password
-  // ) {
-  //   res.json(dataBase.users[0]);
+// dependencie injection
+app.post("/signin", (req, res) => {signin.handleSignin(db, bcrypt)});
+// app.post("/signin", (req, res) => {
+//   const { email, password } = req.body;
 
-  // } else {
-  //   res.status(400).json("error we tried");
-  // }
+//   if (!email || !password) {
+//     return res.status(400).json('incorrect form submission');
+// }
+//   db.select('email', 'hash').from('login')
+//   .where('email', '=', email)
+//   .then(data => {
+//     const isValid = bcrypt.compareSync(password, data[0].hash);
+//     if (isValid) {
+//       return db.select('*').from('users')
+//         .where('email', '=', email)
+//         .then(user => {
+//           res.json(user[0])
+//         })
+//         .catch(err => res.status(400).json('unable to get user'))
+//     } else {
+//       res.status(400).json('wrong credentials')
+//     }
+//   })
+//   .catch(err => res.status(400).json('wrong credentials'))
+  
 
-  db.select('email', 'hash').from('login')
-  .where('email', '=', req.body.email)
-  .then(data => {
-    const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
-    if (isValid) {
-      return db.select('*').from('users')
-        .where('email', '=', req.body.email)
-        .then(user => {
-          res.json(user[0])
-        })
-        .catch(err => res.status(400).json('unable to get user'))
-    } else {
-      res.status(400).json('wrong credentials')
-    }
-  })
-  .catch(err => res.status(400).json('wrong credentials'))
-});
-
-app.post("/register", (req, res) => {
-  const { email, name, password } = req.body;
-//   bcrypt.genSalt(10, function(err, salt) {
-//     bcrypt.hash(password, salt, function(err, hash) {
-//         console.log(hash);
-//     });
 // });
 
-  // dataBase.user.push({
-  //   id: "125",
-  //   name: name,
-  //   email: email,
-  //   entries: 0,
-  //   joined: new Date(),
-  // });
-  // res.json(dataBase.user[dataBase.user.length - 1]);
-
-  const hash = bcrypt.hashSync(password);
-    db.transaction(trx => {
-      trx.insert({
-        hash: hash,
-        email: email
-      })
-      .into('login')
-      .returning('email')
-      .then(loginEmail => {
-        return trx('users')
-          .returning('*')
-          .insert({
-            email: loginEmail[0],
-            name: name,
-            joined: new Date()
-          })
-          .then(user => {
-            res.json(user[0]);
-          })
-      })
-      .then(trx.commit)
-      .catch(trx.rollback)
-    })
-    .catch(err => res.status(400).json('unable to register'))
-
-});
-
-app.get("/profile/:id", (req, res) => {
-  const { id } = req.params;
-  // let found = false;
-  // dataBase.user.forEach(user => {
-  //   if (user.id === id) {
-  //       found = true;
-  //    return res.json(user);
-  //   } 
-  // })
-  // if(!found) {
-  //     res.status(400).json('not found');
-  // }
-
-  db.select('*').from('users').where({id})
-    .then(user => {
-      if (user.length) {
-        res.json(user[0])
-      } else {
-        res.status(400).json('Not found')
-      }
-    })
-    .catch(err => res.status(400).json('error getting user'))
-
-});
-
-app.put('/image', (req, res) => {
-    const { id } = req.body;
-//   let found = false;
-//   dataBase.user.forEach((user) => {
-//     if (user.id === id) {
-//         found = true;
-//         user.entries++;
-//      return res.json(user.entries);
-//     } 
-//   })
-//   if(!found) {
-//     res.status(400).json('not found');
+app.post("/register", (req, res) =>{ register.handleRegister(req, res, db, bcrypt)});
+// app.post("/register", (req, res) => {
+//   const { email, name, password } = req.body;
+// if (!name || !email || !password) {
+//   return res.status(400).json('incorrect form submission');
 // }
+//   const hash = bcrypt.hashSync(password);
+//     db.transaction(trx => {
+//       trx.insert({
+//         hash: hash,
+//         email: email
+//       })
+//       .into('login')
+//       .returning('email')
+//       .then(loginEmail => {
+//         return trx('users')
+//           .returning('*')
+//           .insert({
+//             email: loginEmail[0],
+//             name: name,
+//             joined: new Date()
+//           })
+//           .then(user => {
+//             res.json(user[0]);
+//           })
+//       })
+//       .then(trx.commit)
+//       .catch(trx.rollback)
+//     })
+//     .catch(err => res.status(400).json('unable to register'))
+// });
 
-db('users').where('id', '=', id)
-  .increment('entries', 1)
-  .returning('entries')
-  .then(entries => {
-    res.json(entries[0]);
-  })
-  .catch(err => res.status(400).json('unable to get entries'))
 
-})
 
+app.get("/profile/:id", (req, res) =>{ profile.handleProfileGet(req, res, db)});
+// app.get("/profile/:id", (req, res) => {
+//   const { id } = req.params;
+//   db.select('*').from('users').where({id})
+//     .then(user => {
+//       if (user.length) {
+//         res.json(user[0])
+//       } else {
+//         res.status(400).json('Not found')
+//       }
+//     })
+//     .catch(err => res.status(400).json('error getting user'))
+// });
+
+app.put("/image", (req, res) =>{ image.handleImagePut(req, res, db)});
+app.post("/imageurl", (req, res) =>{ image.handleAPICall(req, res)});
+
+// app.put('/image', (req, res) => {
+//     const { id } = req.body;
+// db('users').where('id', '=', id)
+//   .increment('entries', 1)
+//   .returning('entries')
+//   .then(entries => {
+//     res.json(entries[0]);
+//   })
+//   .catch(err => res.status(400).json('unable to get entries'))
+
+// })
+
+// needs to be dynamic for environment
+// const Port = process.env.PORT;
 app.listen(3000, () => {
-  console.log("listening on port 3000");
+  console.log(`listening on port 3000 `);
+
+  // console.log(`listening on port ${Port} `);
 });
+
