@@ -38,26 +38,6 @@ app.use(express.json());
 // app.use(bodyParser.json());
 app.use(cors());
 
-const dataBase = {
-  user: [
-    {
-      id: "123",
-      name: "Joshua",
-      email: "joshuacarpentier21@gmail.com",
-      password: "cook",
-      entries: 0,
-      joined: new Date(),
-    },
-    {
-      id: "124",
-      name: "Jim",
-      email: "jim@example.com",
-      password: "look",
-      entries: 0,
-      joined: new Date(),
-    },
-  ],
-};
 /**  Route plan
  * root /
  * /Signin whcih wil POST and respond with success or fail always POST to prevent man in the middle attacks.
