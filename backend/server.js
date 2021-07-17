@@ -1,8 +1,13 @@
 const express = require("express");
+
+
 const bodyParser = require("body-parser");
 const bcrypt = require("bcryptjs");
-const cors = require("cors");
-const knex = require('knex');
+// const cors = require("cors");
+const httpproxymid = require("http-proxy-middleware");
+// const knex = require('knex');
+const sequelize = require("sequelize");
+
 
 const register = require('./controller/register');
 const signin = require('./controller/signin');
@@ -10,9 +15,9 @@ const profile = require('./controller/profile');
 const image = require('./controller/image');
 
 
-const db = knex({
-  client: 'pg',
-  connection: process.env.POSTGRES_URI 
+// const db = knex({
+//   client: 'pg',
+//   connection: process.env.POSTGRES_URI 
 
   // connection: {
   //   host : '127.0.0.1',
@@ -27,16 +32,17 @@ const db = knex({
   // migrations: {
   //   tableName: 'postgres'
   // }
-});
+// });
 
-db.select('*').from('users').then(data =>{
-  console.log(data);
-});
+// db.select('*').from('users').then(data =>{
+//   console.log(data);
+// });
 
 const app = express();
 app.use(express.json());
 // app.use(bodyParser.json());
-app.use(cors());
+
+// app.use(cors());
 
 /**  Route plan
  * root /

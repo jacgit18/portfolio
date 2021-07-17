@@ -5,10 +5,11 @@
   "main": "script.js",
   "scripts": {
     "start": "nodemon backend/server.js",
-    "dev": "nodemon -r dotenv/config api/app.js",
-    "docker_dev": "nodemon --legacy-watch ./api/app.js",
+    "start:dev": "nodemon server.js",
+    "dev": "nodemon -r dotenv/config backend/server.js",
+    "docker_dev": "nodemon --legacy-watch ./backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd client && npm install && npm run build"
+    "build": "cd frontend && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -21,10 +22,9 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "clarifai": "^2.9.1",
-    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
-    "knex": "^0.95.7",
+    "http-proxy-middleware": "^2.0.1",
     "morgan": "^1.10.0",
     "node-gyp": "^8.1.0",
     "passport": "^0.4.1",
