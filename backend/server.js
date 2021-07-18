@@ -54,7 +54,7 @@ app.use(express.json());
  *
  */
 
-app.get("/", (req, res) => {res.send(dataBase.user);});
+app.get("/", (req, res) => {res.send("It works");});
 
 // dependencie injection
 app.post("/signin", (req, res) => {signin.handleSignin(db, bcrypt)});
