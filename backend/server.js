@@ -148,10 +148,10 @@ app.post("/imageurl", (req, res) =>{ image.handleAPICall(req, res)});
 // })
 
 // needs to be dynamic for environment
-// const Port = process.env.PORT;
-app.listen(3000, () => {
-  console.log(`listening on port 3000 `);
+const Port = process.env.PORT;
+app.listen(Port || 3000, () => {
+  // console.log(`listening on port 3000 `);
 
-  // console.log(`listening on port ${Port} `);
+  console.log(`listening on port ${Port} `);
 });
 
