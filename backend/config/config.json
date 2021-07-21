@@ -1,0 +1,28 @@
+{
+  "development": {
+    "username": "ctp_user",
+    "password": "ctp_pass",
+    "database": "app2019_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "docker":{
+    "database": "app2020_docker",
+    "username": "ctp_user",
+    "password": "ctp_pass",
+    "dialect": "postgres",
+    "host": "postgres",
+    "port": 5432
+  },
+  "test": {
+    "username": "ctp_user",
+    "password": "ctp_pass",
+    "database": "app2019_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres"
+  }
+}

@@ -14,6 +14,13 @@ const signin = require('./controller/signin');
 const profile = require('./controller/profile');
 const image = require('./controller/image');
 
+ sequelize = new Sequelize('postgres://user:pass@example.com:5432/portfolio') // Example for postgres
+try {
+   sequelize.authenticate();
+  console.log('Connection has been established successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
 
 // const db = knex({
 //   client: 'pg',
