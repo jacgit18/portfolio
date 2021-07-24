@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:14.17.2-alpine
 
 # Create app directory
 WORKDIR /src
@@ -11,13 +11,15 @@ COPY ./package*.json ./
 # If you are building your code for production
 # RUN npm ci --only=production
 #RUN npm ci -qy
-RUN npm install
+RUN npm ci
 
 # Bundle app source
-COPY backend/ ./backend
+COPY . .
 
 # Expose Port 3000
-EXPOSE 3000
+EXPOSE 3001
 
-# CMD ["npm", "run", "dev"]
-CMD ["node", "backend/index.js"]
+
+
+CMD ["npm", "start"]
+

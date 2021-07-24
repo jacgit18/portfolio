@@ -1,18 +1,18 @@
-version: '3.3'
+version: '3.8'
 services:
   postgres:
-    image: postgres:13.0-alpine
+    image: postgres:13.3
     ports:
       - "5432:5432" 
     environment:
-        POSTGRES_USER: ctp_user
+        POSTGRES_USER: postgres
         POSTGRES_PASSWORD: test
-        POSTGRES_DB: app2020_docker
+        POSTGRES_DB: postgres
 
   server: 
     build: 
       context: .
-      dockerfile: ./backend/Dockerfile
+      dockerfile: ./Dockerfile
     volumes: 
       - './backend:/usr/app/backend'
       - /usr/app/node_modules
