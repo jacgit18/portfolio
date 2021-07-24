@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require("express").Router();
 
 
 const bodyParser = require("body-parser");
@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 // const cors = require("cors");
 const httpproxymid = require("http-proxy-middleware");
 // const knex = require('knex');
-const sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 
 
 const register = require('./controller/register');
@@ -14,42 +14,23 @@ const signin = require('./controller/signin');
 const profile = require('./controller/profile');
 const image = require('./controller/image');
 
- sequelize = new Sequelize('postgres://user:pass@example.com:5432/portfolio') // Example for postgres
-try {
-   sequelize.authenticate();
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
 
-// const db = knex({
-//   client: 'pg',
-//   connection: process.env.POSTGRES_URI 
-
-  // connection: {
-  //   host : '127.0.0.1',
-  //   user : '',
-  //   password : 'test',
-  //   database : 'portfolio'
-  // }
-  // pool: {
-  //   min : 2,
-  //   max : 10,
-  // },
-  // migrations: {
-  //   tableName: 'postgres'
-  // }
-// });
-
-// db.select('*').from('users').then(data =>{
-//   console.log(data);
-// });
 
 const app = express();
-app.use(express.json());
 // app.use(bodyParser.json());
-
 // app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET', 'POST', 'PUT', 'DELETE');
+  next();
+
+})
+
+app.use('/dev', require('./routes/dev'));
+
 
 /**  Route plan
  * root /
@@ -61,7 +42,7 @@ app.use(express.json());
  *
  */
 
-app.get("/", (req, res) => {res.send("It works");});
+express.get("/", (req, res) => {res.send("It works");});
 
 // dependencie injection
 app.post("/signin", (req, res) => {signin.handleSignin(db, bcrypt)});
@@ -155,10 +136,21 @@ app.post("/imageurl", (req, res) =>{ image.handleAPICall(req, res)});
 // })
 
 // needs to be dynamic for environment
-const Port = process.env.PORT;
-app.listen(Port || 3000, () => {
-  // console.log(`listening on port 3000 `);
+try {
+  const Port = process.env.EXTERNAL_PORT;
 
-  console.log(`listening on port ${Port} `);
-});
+  app.listen( Port || 3000, () => {
+    console.log(`listening on port ${Port} `);
+
+  }) ;
+} catch (error) {
+  console.error(error);
+
+}
+
+  // const Port = process.env.PORT;
+// app.listen(Port || 3000, () => {
+  // console.log(`listening on port 3000 `);
+//   console.log(`listening on port ${Port} `);
+// });
 

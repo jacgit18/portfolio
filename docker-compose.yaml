@@ -29,7 +29,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
     volumes: 
-      - './backend:/var/lib/postgresql'
+      - './backend:/var/lib/docker/volumes/31d269731bc7cf883864d46b8ac68a3ded7a2256222660ab7d3f7d8ef23da7da/_data'
       # - './backend:/usr/app/backend'
       # - /usr/app/node_modules
     command: npm run docker_dev
@@ -39,9 +39,13 @@ services:
       - postgres
     environment:
       PORT: 3000
-      NODE_ENV: "docker"
-      SESSION_SECRET: "fa6312l3&0pzjcq#x3sadopgllurz#wknu*s=o#63ouv^entei"
-      CHOKIDAR_USEPOLLING: "true"
+       - PGDATABASE=portfolio
+       - PGUSER=jacdoc
+       - PGPASSWORD=test
+       - PGHOST=postgres
+      # NODE_ENV: "docker"
+      # SESSION_SECRET: "fa6312l3&0pzjcq#x3sadopgllurz#wknu*s=o#63ouv^entei"
+      # CHOKIDAR_USEPOLLING: "true"
 
   client:
     build:
