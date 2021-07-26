@@ -9,3 +9,4 @@ router.get('/version', controller.version);
 // app.post("/register", (req, res) =>{ register.handleRegister(req, res, db, bcrypt)});
 
 module.exports = router;
+
