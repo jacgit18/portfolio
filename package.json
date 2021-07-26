@@ -4,10 +4,10 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "start": "nodemon backend/server.js",
-    "start:dev": "nodemon server.js",
-    "dev": "nodemon -r dotenv/config backend/server.js",
-    "docker_dev": "nodemon --legacy-watch ./backend/server.js",
+    "start": "nodemon backend/index.js",
+    "start:dev": "nodemon index.js",
+    "dev": "nodemon -r dotenv/config backend/index.js",
+    "docker_dev": "nodemon --legacy-watch ./backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cd frontend && npm install && npm run resolve && npm run build"
   },

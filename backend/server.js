@@ -45,7 +45,7 @@ app.use('/dev', require('./routes/dev'));
 express.get("/", (req, res) => {res.send("It works");});
 
 // dependencie injection
-app.post("/signin", (req, res) => {signin.handleSignin(db, bcrypt)});
+express.post("/signin", (req, res) => {signin.handleSignin(db, bcrypt)});
 // app.post("/signin", (req, res) => {
 //   const { email, password } = req.body;
 
@@ -72,7 +72,7 @@ app.post("/signin", (req, res) => {signin.handleSignin(db, bcrypt)});
 
 // });
 
-app.post("/register", (req, res) =>{ register.handleRegister(req, res, db, bcrypt)});
+express.post("/register", (req, res) =>{ register.handleRegister(req, res, db, bcrypt)});
 // app.post("/register", (req, res) => {
 //   const { email, name, password } = req.body;
 // if (!name || !email || !password) {
@@ -106,7 +106,7 @@ app.post("/register", (req, res) =>{ register.handleRegister(req, res, db, bcryp
 
 
 
-app.get("/profile/:id", (req, res) =>{ profile.handleProfileGet(req, res, db)});
+express.get("/profile/:id", (req, res) =>{ profile.handleProfileGet(req, res, db)});
 // app.get("/profile/:id", (req, res) => {
 //   const { id } = req.params;
 //   db.select('*').from('users').where({id})
@@ -120,8 +120,8 @@ app.get("/profile/:id", (req, res) =>{ profile.handleProfileGet(req, res, db)});
 //     .catch(err => res.status(400).json('error getting user'))
 // });
 
-app.put("/image", (req, res) =>{ image.handleImagePut(req, res, db)});
-app.post("/imageurl", (req, res) =>{ image.handleAPICall(req, res)});
+express.put("/image", (req, res) =>{ image.handleImagePut(req, res, db)});
+express.post("/imageurl", (req, res) =>{ image.handleAPICall(req, res)});
 
 // app.put('/image', (req, res) => {
 //     const { id } = req.body;

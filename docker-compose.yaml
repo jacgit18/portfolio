@@ -24,7 +24,7 @@ services:
 
   server: 
     container_name: backend
-    image: backend:0.0.3
+    image: backend:0.0.4
     build: 
       context: .
       dockerfile: ./Dockerfile
@@ -59,7 +59,7 @@ services:
     depends_on: 
       - server
     ports:
-        - target: 3000
+        - target: 3001
           published: 4960
           protocol: tcp
           mode: host
@@ -67,6 +67,6 @@ services:
 
     # npm ci
     environment:
-      PROXY: "http://server:3000"
+      PROXY: "http://server:3001"
       SKIP_PREFLIGHT_CHECK: "true"
       CHOKIDAR_USEPOLLING: "true"
