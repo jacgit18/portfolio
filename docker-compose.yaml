@@ -8,6 +8,8 @@ services:
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: test
         POSTGRES_DB: postgres
+  # build: ./postgres
+
 
   # node_backend:
   #   container_name: backend
@@ -34,11 +36,11 @@ services:
       # - /usr/app/node_modules
     command: npm run docker_dev
     ports:
-      - "3000:3000"
+      - "3001:3001"
     depends_on: 
       - postgres
     environment:
-      PORT: 3000
+      PORT: 3001
        - PGDATABASE=portfolio
        - PGUSER=jacdoc
        - PGPASSWORD=test
@@ -59,7 +61,7 @@ services:
     depends_on: 
       - server
     ports:
-        - target: 3001
+        - target: 3000
           published: 4960
           protocol: tcp
           mode: host
@@ -67,6 +69,6 @@ services:
 
     # npm ci
     environment:
-      PROXY: "http://server:3001"
+      PROXY: "http://server:3000"
       SKIP_PREFLIGHT_CHECK: "true"
       CHOKIDAR_USEPOLLING: "true"

@@ -19,7 +19,7 @@ RUN npm install
 COPY . .
 
 # Expose Port 3000
-EXPOSE 3000
+EXPOSE 3001
 
 # CMD ["npm", "run", "dev"]
 CMD ["node", "backend/index.js"]

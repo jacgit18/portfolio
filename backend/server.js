@@ -139,7 +139,7 @@ express.post("/imageurl", (req, res) =>{ image.handleAPICall(req, res)});
 try {
   const Port = process.env.EXTERNAL_PORT;
 
-  app.listen( Port || 3000, () => {
+  app.listen( Port || 3001, () => {
     console.log(`listening on port ${Port} `);
 
   }) ;
