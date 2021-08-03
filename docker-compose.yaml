@@ -52,6 +52,8 @@ services:
       # CHOKIDAR_USEPOLLING: "true"
 
   client:
+    container_name: frontend
+    image: frontend:0.0.4
     build:
       context: ./frontend/
       dockerfile: ./Dockerfile

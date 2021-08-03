@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const accountQueries = require('./accounts/queries');
-const passport = require('../middlewares/authentication');
+const accountQueries = require('../accounts/queries');
+const passport = require('../../middlewares/authentication');
 
 
 router.post('/signup', async (req, res) => {
