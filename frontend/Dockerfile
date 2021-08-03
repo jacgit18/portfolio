@@ -12,6 +12,8 @@ COPY ./package*.json ./
 # RUN npm ci --only=production
 #RUN npm ci -qy
 RUN npm ci
+# RUN npm install --production
+
 
 # Bundle app source
 COPY . .
