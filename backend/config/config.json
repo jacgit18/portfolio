@@ -1,0 +1,28 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "test",
+    "database": "app2021_development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "docker":{
+    "database": "app2021_docker",
+    "username": "postgres",
+    "password": "test",
+    "dialect": "postgres",
+    "host": "postgres",
+    "port": 5432
+  },
+  "test": {
+    "username": "postgres",
+    "password": "test",
+    "database": "app2021_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres"
+  }
+}
