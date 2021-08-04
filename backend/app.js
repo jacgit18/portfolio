@@ -7,7 +7,7 @@ const db = require('./models');
 const passport = require('./middlewares/authentication');
 const app = express();
 const dds =  require("./tests/generateDummyData");
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3001;
 
 // this lets us parse 'application/json' content in http requests
 app.use(bodyParser.json())

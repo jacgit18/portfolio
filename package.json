@@ -9,7 +9,9 @@
     "dev": "nodemon -r dotenv/config backend/index.js",
     "docker_dev": "nodemon --legacy-watch ./backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd frontend && npm install && npm run resolve && npm run build"
+    "build": "cd frontend && npm install && npm run resolve && npm run build",
+    "resolve": "npx npm-force-resolutions"
+
   },
   "author": "",
   "license": "ISC",
@@ -36,5 +38,8 @@
     "ignore": [
       "frontend/"
     ]
+  },
+  "resolutions": {
+    "tar": "6.1.2 "
   }
 }

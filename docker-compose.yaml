@@ -28,7 +28,7 @@ services:
 
   server: 
     container_name: backend
-    image: backend:0.0.4
+    image: backend:0.0.5
     build: 
       context: .
       dockerfile: ./Dockerfile
@@ -53,7 +53,7 @@ services:
 
   client:
     container_name: frontend
-    image: frontend:0.0.4
+    image: frontend:0.0.5
     build:
       context: ./frontend/
       dockerfile: ./Dockerfile
