@@ -11,7 +11,11 @@ COPY ./package*.json ./
 # If you are building your code for production
 # RUN npm ci --only=production
 #RUN npm ci -qy
-RUN npm ci
+RUN yarn 
+# RUN yarn && yarn upgrade
+
+# RUN yarn install --frozen-lockfile
+
 # RUN npm install --production
 
 
@@ -23,5 +27,5 @@ EXPOSE 3000
 
 
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
 
