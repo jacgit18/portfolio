@@ -31,9 +31,9 @@ services:
     image: backend:0.0.5
     build: 
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./backend/Dockerfile
     volumes: 
-      - './backend:/var/lib/docker/volumes//var/lib/docker/volumes/5d89b25d138b344de7b42fa92dae69a6fd75ab1959e4ca1dfb0ab409986d0b92/_data'
+      - './backend:/var/lib/docker/volumes/var/lib/docker/volumes/5d89b25d138b344de7b42fa92dae69a6fd75ab1959e4ca1dfb0ab409986d0b92/_data'
       # - './backend:/usr/app/backend'
       # - /usr/app/node_modules
     command: npm run docker_dev
@@ -72,7 +72,7 @@ services:
     # If all else fails: SKIP_PREFLIGHT_CHECK: "true"
 
     # npm ci
-    environment:
-      PROXY: "http://server:3000"
-      SKIP_PREFLIGHT_CHECK: "true"
-      CHOKIDAR_USEPOLLING: "true"
+    # environment:
+    #   PROXY: "http://server:3000"
+    #   SKIP_PREFLIGHT_CHECK: "true"
+    #   CHOKIDAR_USEPOLLING: "true"
