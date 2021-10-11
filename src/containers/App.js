@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-// import Particles from 'react-particles-js';
+// import Particles from "react-tsparticles";
+
 
 import Register from '../Components/Register/Register';
 import Signin from '../Components/Signin/Signin';
@@ -40,6 +41,16 @@ const initialState = {
         joined: ''
       }
 }
+
+// const particlesInit = (main) => {
+//   console.log(main);
+
+//   // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
+// };
+
+// const particlesLoaded = (container) => {
+//   console.log(container);
+// };
 class App extends Component {
   constructor() {
     super();
@@ -101,44 +112,45 @@ class App extends Component {
 
 
 
-  onButtonSubmit = () => {
-    this.setState({imageUrl: this.state.input});
-    fetch('http://localhost:3000/imageurl', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        input: this.state.input
-      })
-    }).then(response => response.json())
+//   onButtonSubmit = () => {
+//     this.setState({imageUrl: this.state.input});
+//     fetch('http://localhost:3000/imageurl', {
+//       method: 'post',
+//       headers: {'Content-Type': 'application/json'},
+//       body: JSON.stringify({
+//         input: this.state.input
+//       })
+//     }).then(response => response.json())
 
-    .then(response => {
-      console.log('hi', response)
-      if (response) {
-        fetch('http://localhost:3000/image', {
-          method: 'put',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            id: this.state.user.id
-          })
-        })
-          .then(response => response.json())
-          .then(count => {
-            this.setState(Object.assign(this.state.user, { entries: count}))
-          })
+//     .then(response => {
+//       console.log('hi', response)
+//       if (response) {
+//         fetch('http://localhost:3000/image', {
+//           method: 'put',
+//           headers: {'Content-Type': 'application/json'},
+//           body: JSON.stringify({
+//             id: this.state.user.id
+//           })
+//         })
+//           .then(response => response.json())
+//           .then(count => {
+//             this.setState(Object.assign(this.state.user, { entries: count}))
+//           })
 
-      }
-      this.displayFaceBox(this.calculateFaceLocation(response))
-    })
-    .catch(err => console.log(err));
-}
-onRouteChange = (route) => {
-  if (route === 'signout') {
-    this.setState({initialState})
-  } else if (route === 'home') {
-    this.setState({isSignedIn: true})
-  }
-  this.setState({route: route});
-}
+//       }
+//       this.displayFaceBox(this.calculateFaceLocation(response))
+//     })
+//     .catch(err => console.log(err));
+// }
+// onRouteChange = (route) => {
+//   if (route === 'signout') {
+//     this.setState({initialState})
+//   } else if (route === 'home') {
+//     this.setState({isSignedIn: true})
+//   }
+//   this.setState({route: route});
+// }
+
 
 
   render() {
@@ -149,28 +161,104 @@ onRouteChange = (route) => {
        {/* <Particles className='particles'
           params={particlesOptions}
         /> */}
+
+        
+
+        {/* <Particles
+      id="tsparticles"
+      init={particlesInit}
+      loaded={particlesLoaded}
+      options={{
+        background: {
+          color: {
+            value: "#0d47a1",
+          },
+        },
+        fpsLimit: 60,
+        interactivity: {
+          detectsOn: "canvas",
+          events: {
+            onClick: {
+              enable: true,
+              mode: "push",
+            },
+            onHover: {
+              enable: true,
+              mode: "repulse",
+            },
+            resize: true,
+          },
+          modes: {
+            bubble: {
+              distance: 400,
+              duration: 2,
+              opacity: 0.8,
+              size: 40,
+            },
+            push: {
+              quantity: 4,
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4,
+            },
+          },
+        },
+        particles: {
+          color: {
+            value: "#ffffff",
+          },
+          links: {
+            color: "#ffffff",
+            distance: 150,
+            enable: true,
+            opacity: 0.5,
+            width: 1,
+          },
+          collisions: {
+            enable: true,
+          },
+          move: {
+            direction: "none",
+            enable: true,
+            outMode: "bounce",
+            random: false,
+            speed: 6,
+            straight: false,
+          },
+          number: {
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+            value: 80,
+          },
+          opacity: {
+            value: 0.5,
+          },
+          shape: {
+            type: "circle",
+          },
+          size: {
+            random: true,
+            value: 5,
+          },
+        },
+        detectRetina: true,
+      }}
+    /> */}
+
         <Banner />
 
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange} />
-        { route === 'home'
-          ? <div>
+            <div>
               <Logo />
-              <Rank
-                name={this.state.user.name}
-                entries={this.state.user.entries}
-              />
-              <ImageLinkForm
-                onInputChange={this.onInputChange}
-                onButtonSubmit={this.onButtonSubmit}
-              />
-              <FaceRecognition box={box} imageUrl={imageUrl} />
+              
+             
+              
             </div>
-          : (
-             route === 'signin'
-             ? <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
-            )
-        }
+      
+        
         <Footer />
 
       </div>
